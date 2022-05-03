@@ -5,7 +5,7 @@ from clld_corpus_plugin import models
 
 __author__ = "Florian Matter"
 __email__ = "florianmatter@gmail.com"
-__version__ = "0.0.1"
+__version__ = "0.0.2.dev"
 
 
 def includeme(config):
