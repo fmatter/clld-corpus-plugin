@@ -15,5 +15,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2022-05-02
 * initial release
 
-[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/v0.0.1...HEAD
 [0.0.1]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/v0.0.1
