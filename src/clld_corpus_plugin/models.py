@@ -25,18 +25,21 @@ class Text(Base, IdNameDescriptionMixin):
     text_metadata = Column(JSON)
 
 
-@implementer(IWordform)
-class Wordform(Base, PolymorphicBaseMixin, IdNameDescriptionMixin, HasSourceMixin):
-    __table_args__ = (UniqueConstraint("language_pk", "id"),)
-
-    language_pk = Column(Integer, ForeignKey("language.pk"), nullable=False)
-    language = relationship(Language, innerjoin=True)
-
-    contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
-    contribution = relationship(Contribution, backref="wordforms")
-
-    meaning = Column(String)
-    segmented = Column(String)
+try:
+    from clld_morphology_plugin.models import Wordform
+except ImportError:
+    @implementer(IWordform)
+    class Wordform(Base, PolymorphicBaseMixin, IdNameDescriptionMixin, HasSourceMixin):
+        __table_args__ = (UniqueConstraint("language_pk", "id"),)
+    
+        language_pk = Column(Integer, ForeignKey("language.pk"), nullable=False)
+        language = relationship(Language, innerjoin=True)
+    
+        contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
+        contribution = relationship(Contribution, backref="wordforms")
+    
+        meaning = Column(String)
+        segmented = Column(String)
 
 
 class TextSentence(Base, PolymorphicBaseMixin):
