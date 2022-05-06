@@ -47,11 +47,7 @@ GLOSS_ABBR_PATTERN = re.compile(
 
 
 def gloss_with_tooltip(gloss, abbrs):
-    person_map = {
-        "1": "first person",
-        "2": "second person",
-        "3": "third person",
-    }
+    person_map = {"1": "first person", "2": "second person", "3": "third person"}
 
     res = []
     end = 0
@@ -94,6 +90,7 @@ def rendered_sentence(
     in_context=True,
     text_link=True,
     sentence_link=False,
+    counter_class="example-number",
 ):
     """Format a sentence as HTML."""
     if sentence.xhtml:
@@ -128,6 +125,15 @@ def rendered_sentence(
     else:
         text_ref = ""
 
+    if sentence.audio:
+        audio_content = HTML.audio(
+            "",
+            HTML.source(src=f"/audio/{sentence.audio}", type="audio/x-wav"),
+            controls="controls",
+        )
+    else:
+        audio_content = ""
+
     sentence_content = HTML.div(
         HTML.div(
             HTML.a(id=sentence.id),
@@ -146,8 +152,9 @@ def rendered_sentence(
             ),
             class_="sentence",
         ),
+        audio_content,
         class_="sentence-wrapper",
     )
     if in_context:
-        return HTML.li(sentence_content, class_="example-number")
+        return HTML.li(sentence_content, class_=counter_class)
     return sentence_content
