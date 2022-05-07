@@ -29,6 +29,7 @@ def includeme(config):
     config.registry.settings["mako.directories"].insert(
         1, "clld_corpus_plugin:templates"
     )
+    config.add_static_view('clld-corpus-plugin-static', 'clld_corpus_plugin:static')
     config.register_resource("text", models.Text, interfaces.IText, with_index=True)
     config.register_resource(
         "wordform", models.Wordform, interfaces.IWordform, with_index=True
