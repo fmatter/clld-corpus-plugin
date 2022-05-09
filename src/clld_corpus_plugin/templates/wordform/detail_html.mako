@@ -12,10 +12,6 @@
 
 <table class="table table-nonfluid">
     <tbody>
-<%doc>        <tr>
-            <td>Form:</td>
-            <td>${ctx.name}</td>
-        </tr></%doc>
         <tr>
             <td> Meaning:</td>
             <td>
@@ -29,14 +25,19 @@
     </tbody>
 </table>
 
-% if ctx.sentences:
-<h3>${_('Sentences')}</h3>
-<ol>
-% for a in ctx.sentences:
-    ${cutil.rendered_sentence(request, a.sentence, sentence_link=True)}
-% endfor
-</ol>
+% if ctx.sentence_assocs:
+    <% examples = [] %>
+    % for a in set(ctx.sentence_assocs):
+        <%examples.append(a.sentence)%>
+    % endfor
+    <h3>${_('Sentences')}</h3>
+    <ol class="example">
+        % for ex in set(examples):
+            ${cutil.rendered_sentence(request, ex, sentence_link=True)}
+        % endfor
+    </ol>
 % endif
+
 
 <script>
 var highlight_targets = document.getElementsByName("${ctx.id}");

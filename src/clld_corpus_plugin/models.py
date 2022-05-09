@@ -56,6 +56,6 @@ class TextSentence(Base, PolymorphicBaseMixin):
 class SentenceSlice(Base):
     form_pk = Column(Integer, ForeignKey("wordform.pk"))
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"))
-    form = relationship(Wordform, backref="sentences")
+    form = relationship(Wordform, backref="sentence_assocs")
     sentence = relationship(Sentence, backref="forms")
     index = Column(Integer)

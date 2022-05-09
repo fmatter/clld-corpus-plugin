@@ -33,7 +33,7 @@ except ImportError:
                     else:
                         units.append(
                             HTML.div(
-                                HTML.div(link(request, slices[i].form)),
+                                HTML.div(link(request, slices[i].form), name=slices[i].form.id),
                                 HTML.div(gloss, **{"class": "gloss"}),
                                 class_="gloss-unit",
                             )
@@ -90,7 +90,7 @@ def rendered_sentence(
     in_context=True,
     text_link=True,
     sentence_link=False,
-    counter_class="example-number",
+    counter_class="example",
 ):
     """Format a sentence as HTML."""
     if sentence.xhtml:
