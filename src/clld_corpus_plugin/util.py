@@ -137,6 +137,7 @@ def rendered_sentence(
             "",
             HTML.source(src=f"/audio/{sentence.audio}", type="audio/x-wav"),
             controls="controls",
+            preload="none"
         )
     else:
         audio_content = ""
