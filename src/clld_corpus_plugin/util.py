@@ -15,29 +15,36 @@ except ImportError:
         units = []
         if sentence.analyzed and sentence.gloss:
             slices = {sl.index: sl for sl in sentence.forms}
+            print(slices)
+            g_shift = 0 # to keep up to date with how many g-words there are in total
             for pwc, (pword, pgloss) in enumerate(
                 zip(sentence.analyzed.split("\t"), sentence.gloss.split("\t"))
             ):
+                g_words = []
+                glosses = []
                 for gwc, (word, gloss) in enumerate(
                     zip(pword.split("="), pgloss.split("="))
-                ):
-                    i = pwc + gwc
+                ):  
+                    i = pwc + gwc + g_shift
+                    if gwc > 0:
+                        g_shift += 1
+                        for glosslist in [g_words, glosses]:
+                            glosslist.append("=")
                     if i not in slices:
-                        units.append(
-                            HTML.div(
-                                HTML.div(word, class_="morpheme"),
-                                HTML.div(gloss, **{"class": "gloss"}),
-                                class_="gloss-unit",
-                            )
-                        )
+                        g_words.append(HTML.span(word))
+                        glosses.append(HTML.span(gloss))
                     else:
-                        units.append(
-                            HTML.div(
-                                HTML.div(link(request, slices[i].form), name=slices[i].form.id),
-                                HTML.div(gloss, **{"class": "gloss"}),
-                                class_="gloss-unit",
-                            )
-                        )
+                        g_words.append(HTML.span(link(request, slices[i].form), name=slices[i].form.id))
+                        glosses.append(HTML.span(gloss))
+            
+                units.append(
+                    HTML.div(
+                        HTML.div(*g_words),
+                        HTML.div(*glosses, **{"class": "gloss"}),
+                        class_="gloss-unit",
+                    )
+                )
+
         return units
 
 

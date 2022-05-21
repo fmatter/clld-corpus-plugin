@@ -2,7 +2,7 @@
 <%namespace name="util" file="../util.mako"/>
 <%import clld_corpus_plugin.util as cutil%>
 <link rel="stylesheet" href="${req.static_url('clld_corpus_plugin:static/clld-corpus.css')}"/>
-<%! active_menu_item = "units" %>
+<%! active_menu_item = "wordforms" %>
 
 
 <%doc><h2>${_('Form')} ${ctx.name} (${h.link(request, ctx.language)})</h2>
@@ -13,9 +13,13 @@
 <table class="table table-nonfluid">
     <tbody>
         <tr>
-            <td> Meaning:</td>
+            <td> Meanings:</td>
             <td>
-                ‘${ctx.meaning}’
+                <ol>
+                    % for meaning in ctx.meanings:
+                        <li> ${h.link(request, meaning.meaning)} </li>
+                    % endfor
+                </ol>
             </td>
         </tr>
         <tr>
@@ -25,19 +29,15 @@
     </tbody>
 </table>
 
-% if ctx.sentence_assocs:
-    <% examples = [] %>
-    % for a in set(ctx.sentence_assocs):
-        <%examples.append(a.sentence)%>
-    % endfor
-    <h3>${_('Sentences')}</h3>
+<h3>${_('Sentences')}</h3>
+% for form_meaning in ctx.meanings:
+    ‘${h.link(request, form_meaning.meaning)}’:
     <ol class="example">
-        % for ex in set(examples):
-            ${cutil.rendered_sentence(request, ex, sentence_link=True)}
+        % for form_token in form_meaning.meaning.form_tokens:
+            ${cutil.rendered_sentence(request, form_token.sentence,     sentence_link=True)}
         % endfor
     </ol>
-% endif
-
+% endfor
 
 <script>
 var highlight_targets = document.getElementsByName("${ctx.id}");

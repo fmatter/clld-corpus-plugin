@@ -12,35 +12,46 @@ from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Unicode
 from sqlalchemy import UniqueConstraint
+from sqlalchemy import Table
 from sqlalchemy.orm import relationship
 from zope.interface import implementer
 from clld_corpus_plugin.interfaces import IText
-from clld_corpus_plugin.interfaces import IWordform
+from clld_corpus_plugin.interfaces import IWordform, IMeaning
 
 
 @implementer(IText)
 class Text(Base, IdNameDescriptionMixin):
-    pk = Column(Integer, primary_key=True)
     text_type = Column(Unicode())
     text_metadata = Column(JSON)
 
 
 try:
-    from clld_morphology_plugin.models import Wordform
+    from clld_morphology_plugin.models import Wordform, Meaning, FormMeaning
 except ImportError:
-
     @implementer(IWordform)
     class Wordform(Base, PolymorphicBaseMixin, IdNameDescriptionMixin, HasSourceMixin):
         __table_args__ = (UniqueConstraint("language_pk", "id"),)
-
+        __tablename__ = 'wordform'
+    
         language_pk = Column(Integer, ForeignKey("language.pk"), nullable=False)
         language = relationship(Language, innerjoin=True)
-
+    
         contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
         contribution = relationship(Contribution, backref="wordforms")
-
-        meaning = Column(String)
+    
         segmented = Column(String)
+
+    @implementer(IMeaning)
+    class Meaning(Base, IdNameDescriptionMixin):
+        __tablename__ = 'meaning'
+
+
+    class FormMeaning(Base):
+        id = Column(String, unique=True)
+        form_pk = Column(Integer, ForeignKey("wordform.pk"), nullable=False)
+        meaning_pk = Column(Integer, ForeignKey("meaning.pk"), nullable=False)
+        form = relationship(Wordform, innerjoin=True, backref="meanings")
+        meaning = relationship(Meaning, innerjoin=True, backref="forms")
 
 
 class TextSentence(Base, PolymorphicBaseMixin):
@@ -56,6 +67,8 @@ class TextSentence(Base, PolymorphicBaseMixin):
 class SentenceSlice(Base):
     form_pk = Column(Integer, ForeignKey("wordform.pk"))
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"))
+    formmeaning_pk = Column(Integer, ForeignKey("formmeaning.pk"))
     form = relationship(Wordform, backref="sentence_assocs")
     sentence = relationship(Sentence, backref="forms")
+    form_meaning = relationship(FormMeaning, backref="form_tokens")
     index = Column(Integer)

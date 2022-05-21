@@ -2,3 +2,12 @@
     background-color: #FFFF00;
     font-weight: bold;
 }
+
+li.example {
+  counter-increment: examples;
+  counter-reset: subexamples;
+}
+
+li.example::marker {
+  content: "(" counter(examples) ")\a0";
+}

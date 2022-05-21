@@ -6,6 +6,11 @@ class IText(Interface):
     text interface
     """
 
+class IMeaning(Interface):
+    """
+    meaning interface
+    """
+
 
 class IWordform(Interface):
     """
