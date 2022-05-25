@@ -164,5 +164,5 @@ def rendered_sentence(
         class_="sentence-wrapper",
     )
     if in_context:
-        return HTML.li(sentence_content, class_=counter_class)
+        return HTML.li(sentence_content, class_=counter_class, id_=sentence.id)
     return sentence_content
