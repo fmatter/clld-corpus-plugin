@@ -15,7 +15,7 @@ audio_suffixes = [".mp3", ".wav"]
 def audio_view(request):
     audio_id = request.matchdict["audio_id"]
     print("Audio %s requested" % audio_id)
-    audio_path = f"/home/florianm/Dropbox/research/cariban/yawarana/yawarana_corpus/audio/{audio_id}.wav"
+    audio_path = f"audio/{audio_id}.wav"
     if audio_path:
         response = FileResponse(audio_path, request=request, cache_max_age=86400)
         return response
