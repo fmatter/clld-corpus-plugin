@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Removed
+
+### Changed
+
+
+## [0.0.2] - 2022-05-27
+
+### Added
+
 * sentence audios
 * meanings
 * example number formatting
@@ -22,5 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2022-05-02
 * initial release
 
-[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/v0.0.2
 [0.0.1]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/v0.0.1
