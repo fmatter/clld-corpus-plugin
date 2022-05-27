@@ -8,9 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* sentence audios
+* meanings
+* example number formatting
+
 ### Removed
 
 ### Changed
+* better example rendering
+* make some data optional
 
 ## [0.0.1] - 2022-05-02
 * initial release

@@ -15,11 +15,14 @@
 
 <h3>${_('Sentences')}</h3>
 <ol class="example">
-<% form_ids = [] %>
-% for form_token in ctx.form_tokens:
-    ${cutil.rendered_sentence(request, form_token.sentence, sentence_link=True)}
-    <% form_ids.append(form_token.form.id) %>
-% endfor
+    <% form_ids = [] %>
+    % for form_meaning in ctx.forms:
+        ${form_meaning.form}
+        % for form_token in form.form_tokens:
+            ${cutil.rendered_sentence(request, form_token.sentence, sentence_link=True)}
+          <% form_ids.append(form_token.form.id) %>
+        % endfor
+    % endfor
 </ol>
 
 % for form_id in set(form_ids):

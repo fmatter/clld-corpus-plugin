@@ -31,7 +31,6 @@ except ImportError:
     @implementer(IWordform)
     class Wordform(Base, PolymorphicBaseMixin, IdNameDescriptionMixin, HasSourceMixin):
         __table_args__ = (UniqueConstraint("language_pk", "id"),)
-        __tablename__ = 'wordform'
     
         language_pk = Column(Integer, ForeignKey("language.pk"), nullable=False)
         language = relationship(Language, innerjoin=True)
@@ -39,12 +38,9 @@ except ImportError:
         contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
         contribution = relationship(Contribution, backref="wordforms")
     
-        segmented = Column(String)
-
     @implementer(IMeaning)
-    class Meaning(Base, IdNameDescriptionMixin):
-        __tablename__ = 'meaning'
-
+    class Meaning(Base, PolymorphicBaseMixin, IdNameDescriptionMixin):
+        pass
 
     class FormMeaning(Base):
         id = Column(String, unique=True)

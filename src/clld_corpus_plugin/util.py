@@ -15,7 +15,6 @@ except ImportError:
         units = []
         if sentence.analyzed and sentence.gloss:
             slices = {sl.index: sl for sl in sentence.forms}
-            print(slices)
             g_shift = 0 # to keep up to date with how many g-words there are in total
             for pwc, (pword, pgloss) in enumerate(
                 zip(sentence.analyzed.split("\t"), sentence.gloss.split("\t"))

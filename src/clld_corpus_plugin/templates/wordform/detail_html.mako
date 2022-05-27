@@ -33,7 +33,7 @@
 % for form_meaning in ctx.meanings:
     ‘${h.link(request, form_meaning.meaning)}’:
     <ol class="example">
-        % for form_token in form_meaning.meaning.form_tokens:
+        % for form_token in form_meaning.form_tokens:
             ${cutil.rendered_sentence(request, form_token.sentence,     sentence_link=True)}
         % endfor
     </ol>

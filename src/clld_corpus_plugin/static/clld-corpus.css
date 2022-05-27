@@ -3,11 +3,6 @@
     font-weight: bold;
 }
 
-li.example {
-  counter-increment: examples;
-  counter-reset: subexamples;
-}
-
 li.example::marker {
-  content: "(" counter(examples) ")\a0";
+    content: "(" attr(value) ") \a0"
 }
