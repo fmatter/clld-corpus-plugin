@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * sentence audios
 * meanings
 * example number formatting
+* text source
 
 ### Removed
 

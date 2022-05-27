@@ -20,7 +20,7 @@ from clld_corpus_plugin.interfaces import IWordform, IMeaning
 
 
 @implementer(IText)
-class Text(Base, IdNameDescriptionMixin):
+class Text(Base, IdNameDescriptionMixin, HasSourceMixin):
     text_type = Column(Unicode())
     text_metadata = Column(JSON)
 
