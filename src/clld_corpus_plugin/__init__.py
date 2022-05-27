@@ -7,7 +7,7 @@ from pyramid.response import Response, FileResponse
 
 __author__ = "Florian Matter"
 __email__ = "florianmatter@gmail.com"
-__version__ = "0.0.2"
+__version__ = "0.0.3.dev"
 
 audio_suffixes = [".mp3", ".wav"]
 
