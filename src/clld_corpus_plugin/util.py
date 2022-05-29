@@ -121,7 +121,7 @@ def rendered_sentence(
         )
     else:
         surface = HTML.div(sentence.name, " ", class_="object-language")
-    if text_link:
+    if text_link and len(sentence.text_assocs) > 0:
         text = sentence.text_assocs[0].text
         text_ref = (
             " ("
