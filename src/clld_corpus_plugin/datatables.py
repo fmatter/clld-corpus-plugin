@@ -1,10 +1,18 @@
 from clld.web.datatables.base import DataTable
-from clld.web.datatables.base import LinkCol
+from clld.web.datatables.base import LinkCol, Col
 from clld.web.datatables.sentence import Sentences, AudioCol
+from clld_corpus_plugin.models import Text
+
+class CountCol(Col):
+    def __init__(self, dt, name, **kw):
+        Col.__init__(self, dt, name, **kw)
+
+    def format(self, item):
+        return item.part_count
 
 class Texts(DataTable):
     def col_defs(self):
-        return [LinkCol(self, "name")]
+        return [CountCol(self, "Parts", bSortable= False,bSearchable=False), LinkCol(self, "name")]
 
 
 

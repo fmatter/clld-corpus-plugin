@@ -21,7 +21,7 @@
 </dl>
 
 <ol>
-% for s in ctx.sentences:
+% for s in sorted(ctx.sentences, key=lambda x: x.part_no):
 ${cutil.rendered_sentence(request, s.sentence, text_link=False, sentence_link=True)}
 % endfor
 </ol>

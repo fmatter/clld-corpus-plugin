@@ -1,5 +1,5 @@
 from clld.db.meta import Base
-from clld.db.meta import PolymorphicBaseMixin
+from clld.db.meta import PolymorphicBaseMixin, DBSession
 from clld.db.models import IdNameDescriptionMixin
 from clld.db.models import Sentence
 from clld.db.models.common import Contribution
@@ -17,13 +17,18 @@ from sqlalchemy.orm import relationship
 from zope.interface import implementer
 from clld_corpus_plugin.interfaces import IText
 from clld_corpus_plugin.interfaces import IWordform, IMeaning
-
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import case, select, func
+from sqlalchemy.orm import object_session
 
 @implementer(IText)
 class Text(Base, IdNameDescriptionMixin, HasSourceMixin):
     text_type = Column(Unicode())
     text_metadata = Column(JSON)
 
+    @property
+    def part_count(self):
+        return len(self.sentences)
 
 try:
     from clld_morphology_plugin.models import Wordform, Meaning, FormMeaning
@@ -55,9 +60,9 @@ class TextSentence(Base, PolymorphicBaseMixin):
 
     text_pk = Column(Integer, ForeignKey("text.pk"), nullable=False)
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
-    text = relationship(Text, innerjoin=True, backref="sentences", order_by=Sentence.id)
-    sentence = relationship(Sentence, innerjoin=True, backref="text_assocs")
     part_no = Column(Integer)
+    text = relationship(Text, innerjoin=True, backref="sentences", order_by="desc(TextSentence.part_no)")
+    sentence = relationship(Sentence, innerjoin=True, backref="text_assocs")
 
 
 class SentenceSlice(Base):
