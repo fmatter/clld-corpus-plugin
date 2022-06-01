@@ -32,6 +32,7 @@ def includeme(config):
     )
     config.add_static_view('clld-corpus-plugin-static', 'clld_corpus_plugin:static')
     config.register_resource("text", models.Text, interfaces.IText, with_index=True)
+    config.register_resource("tag", models.Tag, interfaces.ITag, with_index=True)
 
     config.add_route("audio_route", "/audio/{audio_id}")
     config.add_view(audio_view, route_name="audio_route")

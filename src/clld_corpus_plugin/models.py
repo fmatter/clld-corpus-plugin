@@ -15,11 +15,19 @@ from sqlalchemy import UniqueConstraint
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
 from zope.interface import implementer
-from clld_corpus_plugin.interfaces import IText
+from clld_corpus_plugin.interfaces import IText, ITag
 from clld_corpus_plugin.interfaces import IWordform, IMeaning
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import case, select, func
 from sqlalchemy.orm import object_session
+
+
+
+
+@implementer(ITag)
+class Tag(Base, IdNameDescriptionMixin):
+    pass
+
 
 @implementer(IText)
 class Text(Base, IdNameDescriptionMixin, HasSourceMixin):
@@ -30,6 +38,22 @@ class Text(Base, IdNameDescriptionMixin, HasSourceMixin):
     def part_count(self):
         return len(self.sentences)
 
+class TextTag(Base, PolymorphicBaseMixin):
+    __table_args__ = (UniqueConstraint("text_pk", "tag_pk"),)
+
+    text_pk = Column(Integer, ForeignKey("text.pk"), nullable=False)
+    tag_pk = Column(Integer, ForeignKey("tag.pk"), nullable=False)
+    text = relationship(Text, innerjoin=True, backref="tags")
+    tag = relationship(Tag, innerjoin=True, backref="texts")
+
+class SentenceTag(Base, PolymorphicBaseMixin):
+    __table_args__ = (UniqueConstraint("sentence_pk", "tag_pk"),)
+
+    sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
+    tag_pk = Column(Integer, ForeignKey("tag.pk"), nullable=False)
+    sentence = relationship(Sentence, innerjoin=True, backref="tags")
+    tag = relationship(Tag, innerjoin=True, backref="sentences")
+    
 try:
     from clld_morphology_plugin.models import Wordform, Meaning, FormMeaning
 except ImportError:
@@ -65,6 +89,7 @@ class TextSentence(Base, PolymorphicBaseMixin):
     sentence = relationship(Sentence, innerjoin=True, backref="text_assocs")
 
 
+
 class SentenceSlice(Base):
     form_pk = Column(Integer, ForeignKey("wordform.pk"))
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"))
@@ -73,3 +98,4 @@ class SentenceSlice(Base):
     sentence = relationship(Sentence, backref="forms")
     form_meaning = relationship(FormMeaning, backref="form_tokens")
     index = Column(Integer)
+

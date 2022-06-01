@@ -21,6 +21,13 @@
 <dl>
     <dt>${_('Language')}:</dt>
     <dd>${h.link(request, ctx.language)}</dd>
+    % if ctx.tags:
+        <dt>Tags</dt> <dd>
+        % for tag in ctx.tags:
+            ${h.link(request, tag.tag)}
+        % endfor
+        </dd>
+    % endif
 </dl>
 
 ${cutil.rendered_sentence(request, ctx, in_context=False, text_link=False)|n}

@@ -7,16 +7,23 @@
 
 <h3>${_('Text')} “${ctx.name}”</h3>
 <dl>
-    % if ctx.text_metadata:
-        % for key, value in ctx.text_metadata.items():
-            <dt>${key.capitalize()}</dt> <dd>${value}</dd>
-        % endfor
-    % endif
     % if ctx.source:
         <dt>Source</dt> <dd>${h.link(request, ctx.source)}</dd>
     % endif
     % if ctx.description:
-        <dt>Summary</dt> ${h.text2html(h.Markup(ctx.description))}
+        <dt>Summary</dt> <dd>${h.text2html(h.Markup(ctx.description))}</dd>
+    % endif
+    % if ctx.tags:
+        <dt>Tags</dt> <dd>
+        % for tag in ctx.tags:
+            ${h.link(request, tag.tag)}
+        % endfor
+        </dd>
+    % endif
+    % if ctx.text_metadata:
+        % for key, value in ctx.text_metadata.items():
+            <dt>${key.capitalize()}</dt> <dd>${value}</dd>
+        % endfor
     % endif
 </dl>
 
