@@ -15,7 +15,7 @@ except ImportError:
         units = []
         if sentence.analyzed and sentence.gloss:
             slices = {sl.index: sl for sl in sentence.forms}
-            g_shift = 0 # to keep up to date with how many g-words there are in total
+            g_shift = 0  # to keep up to date with how many g-words there are in total
             for pwc, (pword, pgloss) in enumerate(
                 zip(sentence.analyzed.split("\t"), sentence.gloss.split("\t"))
             ):
@@ -23,7 +23,7 @@ except ImportError:
                 glosses = []
                 for gwc, (word, gloss) in enumerate(
                     zip(pword.split("="), pgloss.split("="))
-                ):  
+                ):
                     i = pwc + gwc + g_shift
                     if gwc > 0:
                         g_shift += 1
@@ -33,9 +33,13 @@ except ImportError:
                         g_words.append(HTML.span(word))
                         glosses.append(HTML.span(gloss))
                     else:
-                        g_words.append(HTML.span(link(request, slices[i].form), name=slices[i].form.id))
+                        g_words.append(
+                            HTML.span(
+                                link(request, slices[i].form), name=slices[i].form.id
+                            )
+                        )
                         glosses.append(HTML.span(gloss))
-            
+
                 units.append(
                     HTML.div(
                         HTML.div(*g_words),
@@ -136,7 +140,7 @@ def rendered_sentence(
             "",
             HTML.source(src=f"/audio/{sentence.audio}", type="audio/x-wav"),
             controls="controls",
-            preload="none"
+            preload="none",
         )
     else:
         audio_content = ""

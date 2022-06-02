@@ -22,8 +22,6 @@ from sqlalchemy import case, select, func
 from sqlalchemy.orm import object_session
 
 
-
-
 @implementer(ITag)
 class Tag(Base, IdNameDescriptionMixin):
     pass
@@ -38,6 +36,7 @@ class Text(Base, IdNameDescriptionMixin, HasSourceMixin):
     def part_count(self):
         return len(self.sentences)
 
+
 class TextTag(Base, PolymorphicBaseMixin):
     __table_args__ = (UniqueConstraint("text_pk", "tag_pk"),)
 
@@ -46,6 +45,7 @@ class TextTag(Base, PolymorphicBaseMixin):
     text = relationship(Text, innerjoin=True, backref="tags")
     tag = relationship(Tag, innerjoin=True, backref="texts")
 
+
 class SentenceTag(Base, PolymorphicBaseMixin):
     __table_args__ = (UniqueConstraint("sentence_pk", "tag_pk"),)
 
@@ -53,20 +53,22 @@ class SentenceTag(Base, PolymorphicBaseMixin):
     tag_pk = Column(Integer, ForeignKey("tag.pk"), nullable=False)
     sentence = relationship(Sentence, innerjoin=True, backref="tags")
     tag = relationship(Tag, innerjoin=True, backref="sentences")
-    
+
+
 try:
     from clld_morphology_plugin.models import Wordform, Meaning, FormMeaning
 except ImportError:
+
     @implementer(IWordform)
     class Wordform(Base, PolymorphicBaseMixin, IdNameDescriptionMixin, HasSourceMixin):
         __table_args__ = (UniqueConstraint("language_pk", "id"),)
-    
+
         language_pk = Column(Integer, ForeignKey("language.pk"), nullable=False)
         language = relationship(Language, innerjoin=True)
-    
+
         contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
         contribution = relationship(Contribution, backref="wordforms")
-    
+
     @implementer(IMeaning)
     class Meaning(Base, PolymorphicBaseMixin, IdNameDescriptionMixin):
         pass
@@ -85,9 +87,10 @@ class TextSentence(Base, PolymorphicBaseMixin):
     text_pk = Column(Integer, ForeignKey("text.pk"), nullable=False)
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
     part_no = Column(Integer)
-    text = relationship(Text, innerjoin=True, backref="sentences", order_by="desc(TextSentence.part_no)")
+    text = relationship(
+        Text, innerjoin=True, backref="sentences", order_by="desc(TextSentence.part_no)"
+    )
     sentence = relationship(Sentence, innerjoin=True, backref="text_assocs")
-
 
 
 class SentenceSlice(Base):
@@ -98,4 +101,3 @@ class SentenceSlice(Base):
     sentence = relationship(Sentence, backref="forms")
     form_meaning = relationship(FormMeaning, backref="form_tokens")
     index = Column(Integer)
-
