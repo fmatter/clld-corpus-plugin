@@ -7,14 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+### Removed
+
+### Changed
+
+## [0.0.3] - 2022-06-03
+
+### Added
 * text and sentence tags
-* text length and ID in index table
+* show text length and ID in index table
+* sort text sentences by part number
 
 ### Removed
 * bugs
 
 ### Changed
-
+* examples don't *need* a text
 
 ## [0.0.2] - 2022-05-27
 
@@ -34,6 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2022-05-02
 * initial release
 
-[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/v0.0.2...HEAD
-[0.0.2]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/v0.0.2
+[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.2...HEAD
+[0.0.2]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.2
 [0.0.1]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/v0.0.1
