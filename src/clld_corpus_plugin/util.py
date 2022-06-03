@@ -101,6 +101,7 @@ def rendered_sentence(
     text_link=True,
     sentence_link=False,
     counter_class="example",
+    example_id=None,
 ):
     """Format a sentence as HTML."""
     if sentence.xhtml:
@@ -147,7 +148,7 @@ def rendered_sentence(
 
     sentence_content = HTML.div(
         HTML.div(
-            HTML.a(id=sentence.id),
+            HTML.a(id=example_id or sentence.id),
             HTML.div(
                 HTML.div(sentence.original_script, class_="original-script")
                 if sentence.original_script
@@ -167,5 +168,7 @@ def rendered_sentence(
         class_="sentence-wrapper",
     )
     if in_context:
-        return HTML.li(sentence_content, class_=counter_class, id_=sentence.id)
+        return HTML.li(
+            sentence_content, class_=counter_class, id_=example_id or sentence.id
+        )
     return sentence_content
