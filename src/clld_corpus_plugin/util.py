@@ -156,10 +156,14 @@ def rendered_sentence(
                 surface,
                 HTML.div(*units, **{"class": "gloss-box"}) if units else "",
                 HTML.div(
-                    HTML.span(sentence.description, class_="translation"), text_ref
-                )
-                if sentence.description
-                else "",
+                    HTML.span(sentence.description, class_="translation")
+                    if sentence.description
+                    else "",
+                    " / " + HTML.span(sentence.markup_description, class_="translation")
+                    if sentence.markup_description
+                    else "",
+                    text_ref,
+                ),
                 class_="body",
             ),
             class_="sentence",
