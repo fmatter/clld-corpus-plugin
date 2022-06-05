@@ -3,7 +3,18 @@
 <%import clld_corpus_plugin.util as cutil%>
 <link rel="stylesheet" href="${req.static_url('clld_corpus_plugin:static/clld-corpus.css')}"/>
 <%! active_menu_item = "texts" %>
+<style>
+#top {
+    position: fixed;
+    width: 100%;
+}
+#buffer {
+    min-height: 40px
+}
+</style>
 
+<div id="buffer">
+</div>
 
 <h3>${_('Text')} “${ctx.name}”</h3>
 <dl>
