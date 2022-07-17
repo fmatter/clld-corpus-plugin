@@ -119,7 +119,6 @@ def rendered_sentence(
         abbrs = dict((g.id, g.name) for g in q)
 
     units = rendered_gloss_units(request, sentence)
-
     if sentence_link:
         surface = HTML.div(
             link(request, sentence, label=sentence.name), class_="object-language"

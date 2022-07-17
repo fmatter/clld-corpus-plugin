@@ -3,7 +3,9 @@ from clld_corpus_plugin import interfaces
 from clld_corpus_plugin import models
 from clld_corpus_plugin import datatables
 from pyramid.response import Response, FileResponse
+import logging
 
+log = logging.getLogger(__name__)
 
 __author__ = "Florian Matter"
 __email__ = "florianmatter@gmail.com"
@@ -14,15 +16,14 @@ audio_suffixes = [".mp3", ".wav"]
 
 def audio_view(request):
     audio_id = request.matchdict["audio_id"]
-    print("Audio %s requested" % audio_id)
+    log.debug("Audio %s requested" % audio_id)
     audio_path = f"audio/{audio_id}.wav"
-    print(audio_path)
     if audio_path:
         response = FileResponse(audio_path, request=request, cache_max_age=86400)
         return response
     else:
         error = "Audio %s requested but not found" % audio_id
-        print(error)
+        log.error(error)
         return Response("<body>%s</body>" % error)
 
 
