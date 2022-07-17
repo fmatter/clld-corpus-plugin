@@ -130,6 +130,8 @@ def rendered_sentence(
         text_ref = (
             " ("
             + link(request, text, label=text.id, url_kw={"_anchor": sentence.id})
+            + ": "
+            + link(request, sentence, label=sentence.text_assocs[0].part_no)
             + ")"
         )
     else:
