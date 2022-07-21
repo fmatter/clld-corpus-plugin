@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * text part in sentence rendering
 * TextTable cldf metadata
+* speaker model (and cldf data)
 
 ### Removed
 

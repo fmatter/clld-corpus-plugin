@@ -41,6 +41,10 @@ ${cutil.rendered_sentence(request, ctx, in_context=False, text_link=False)|n}
 <dt>${_('Type')}:</dt>
 <dd>${ctx.type}</dd>
 % endif
+% if ctx.speaker:
+<dt>${_('Speaker')}:</dt>
+<dd>${h.link(request, ctx.speaker[0].speaker)}</dd>
+% endif
 % if ctx.references or ctx.source or ctx.text_assocs:
 <dt>${_('Source')}:</dt>
 % if ctx.source:

@@ -15,7 +15,7 @@ from sqlalchemy import UniqueConstraint
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
 from zope.interface import implementer
-from clld_corpus_plugin.interfaces import IText, ITag
+from clld_corpus_plugin.interfaces import IText, ITag, ISpeaker
 from clld_corpus_plugin.interfaces import IWordform, IMeaning
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import case, select, func
@@ -25,6 +25,19 @@ from sqlalchemy.orm import object_session
 @implementer(ITag)
 class Tag(Base, IdNameDescriptionMixin):
     pass
+
+
+@implementer(ISpeaker)
+class Speaker(Base, IdNameDescriptionMixin):
+    pass
+
+class SpeakerSentence(Base, PolymorphicBaseMixin):
+    __table_args__ = (UniqueConstraint("speaker_pk", "sentence_pk"),)
+
+    sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
+    speaker_pk = Column(Integer, ForeignKey("speaker.pk"), nullable=False)
+    speaker = relationship(Speaker, innerjoin=True, backref="sentences")
+    sentence = relationship(Sentence, innerjoin=True, backref="speaker")    
 
 
 @implementer(IText)

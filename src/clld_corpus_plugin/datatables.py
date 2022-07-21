@@ -20,6 +20,13 @@ class Texts(DataTable):
             CountCol(self, "Parts", bSortable=False, bSearchable=False),
         ]
 
+class Speakers(DataTable):
+    def col_defs(self):
+        return [
+            Col(self, "id"),
+            LinkCol(self, "name"),
+        ]
+
 
 class SentencesWithAudio(Sentences):
     def col_defs(self):

@@ -9,3 +9,4 @@ except ImportError:  # pragma: no cover
 
 cldf_path = files("clld_corpus_plugin") / "cldf"
 TextTable = jsonlib.load(cldf_path / "TextTable-metadata.json")
+SpeakerTable = jsonlib.load(cldf_path / "SpeakerTable-metadata.json")
