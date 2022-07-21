@@ -7,5 +7,5 @@ except ImportError:  # pragma: no cover
     from importlib_resources import files  # pragma: no cover
 
 
-cldf_path = files("clld_morphology_plugin") / "cldf"
+cldf_path = files("clld_corpus_plugin") / "cldf"
 TextTable = jsonlib.load(cldf_path / "TextTable-metadata.json")
