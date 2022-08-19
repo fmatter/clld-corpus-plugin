@@ -7,23 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-* text part in sentence rendering
-* TextTable cldf metadata
-* speaker model (and cldf data)
 
 ### Removed
 
 ### Changed
+
+### Fixed
+
+## [0.0.5] -- 2022-08-19
+
+### Added
+* text part in sentence rendering
+* TextTable cldf metadata
+* speaker model (and cldf data)
 
 ## [0.0.4] -- 2022-06-10
 
 ### Added
 * use `markup_description` as original / alternative translation
 * floating top navigation bar in text detail view
-
-### Removed
-
-### Changed
 
 ## [0.0.3] - 2022-06-03
 
@@ -47,8 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * example number formatting
 * text source
 
-### Removed
-
 ### Changed
 * better example rendering
 * make some data optional
@@ -56,7 +56,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2022-05-02
 * initial release
 
-[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.4...HEAD
+[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.5...HEAD
+[0.0.5]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.5
 [0.0.4]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.4
 [0.0.3]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.3
 [0.0.2]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.2
