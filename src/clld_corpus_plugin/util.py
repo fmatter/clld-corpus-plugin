@@ -102,6 +102,7 @@ def rendered_sentence(
     sentence_link=False,
     counter_class="example",
     example_id=None,
+    title=None,
 ):
     """Format a sentence as HTML."""
     if sentence.xhtml:
@@ -151,6 +152,7 @@ def rendered_sentence(
         HTML.div(
             HTML.a(id=example_id or sentence.id),
             HTML.div(
+                title,
                 HTML.div(sentence.original_script, class_="original-script")
                 if sentence.original_script
                 else "",
