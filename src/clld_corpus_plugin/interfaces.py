@@ -24,6 +24,7 @@ class IWordform(Interface):
     form interface
     """
 
+
 class ISpeaker(Interface):
     """
     speaker interface

@@ -1,7 +1,6 @@
 from clld.web.datatables.base import DataTable
 from clld.web.datatables.base import LinkCol, Col
 from clld.web.datatables.sentence import Sentences, AudioCol
-from clld_corpus_plugin.models import Text
 
 
 class CountCol(Col):
@@ -20,12 +19,10 @@ class Texts(DataTable):
             CountCol(self, "Parts", bSortable=False, bSearchable=False),
         ]
 
+
 class Speakers(DataTable):
     def col_defs(self):
-        return [
-            Col(self, "id"),
-            LinkCol(self, "name"),
-        ]
+        return [Col(self, "id"), LinkCol(self, "name")]
 
 
 class SentencesWithAudio(Sentences):
