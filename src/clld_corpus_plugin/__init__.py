@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 __author__ = "Florian Matter"
 __email__ = "florianmatter@gmail.com"
-__version__ = "0.0.6"
+__version__ = "0.0.7.dev"
 
 audio_suffixes = [".mp3", ".wav"]
 
