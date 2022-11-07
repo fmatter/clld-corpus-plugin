@@ -11,6 +11,9 @@
 #buffer {
     min-height: 40px
 }
+html {
+    scroll-padding-top: 40px;
+}
 </style>
 
 <div id="buffer">

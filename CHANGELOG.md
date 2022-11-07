@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 ### Fixed
+* anchors' positions are shifted to adapt to the floating top bar in text detail view
+* CLDF json metadata in MANIFEST.in
 
 ## [0.0.5] -- 2022-08-19
 
