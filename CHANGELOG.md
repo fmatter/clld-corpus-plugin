@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+* `record_number` and `phrase_number`
+
 ## [0.0.6] - 2022-11-06
 
 ### Added
