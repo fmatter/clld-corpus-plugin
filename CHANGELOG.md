@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.7] - 2022-11-27
+
 ### Changed
 * `record_number` and `phrase_number`
 
@@ -60,7 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2022-05-02
 * initial release
 
-[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.6...HEAD
+[Unreleased]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.7...HEAD
+[0.0.7]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.6...0.0.7
 [0.0.6]: https://github.com/fmatter/clld-corpus-plugin/compare/0.0.5...0.0.6
 [0.0.5]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.5
 [0.0.4]: https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.4
