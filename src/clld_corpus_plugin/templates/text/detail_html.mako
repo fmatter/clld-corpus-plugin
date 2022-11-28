@@ -42,9 +42,9 @@ html {
 </dl>
 
 <ol>
-% for s in sorted(ctx.sentences, key=lambda x: x.part_no):
-${cutil.rendered_sentence(request, s.sentence, text_link=False, sentence_link=True)}
-% endfor
+    % for s in sorted(ctx.sentences, key=lambda x: x.record_number):
+        ${cutil.rendered_sentence(request, s.sentence, text_link=False, sentence_link=True)}
+    % endfor
 </ol>
 
 <script src="${req.static_url('clld_corpus_plugin:static/clld-corpus.js')}">

@@ -96,9 +96,11 @@ class TextSentence(Base, PolymorphicBaseMixin):
 
     text_pk = Column(Integer, ForeignKey("text.pk"), nullable=False)
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
-    part_no = Column(Integer)
+    record_number = Column(Integer, nullable=False)
+    phrase_number = Column(Integer, nullable=True)
+
     text = relationship(
-        Text, innerjoin=True, backref="sentences", order_by="desc(TextSentence.part_no)"
+        Text, innerjoin=True, backref="sentences", order_by="desc(TextSentence.record_number)"
     )
     sentence = relationship(Sentence, innerjoin=True, backref="text_assocs")
 

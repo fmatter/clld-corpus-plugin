@@ -132,7 +132,7 @@ def rendered_sentence(
             " ("
             + link(request, text, label=text.id, url_kw={"_anchor": sentence.id})
             + ": "
-            + link(request, sentence, label=sentence.text_assocs[0].part_no)
+            + link(request, sentence, label=sentence.text_assocs[0].record_number)
             + ")"
         )
     else:
