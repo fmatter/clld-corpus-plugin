@@ -17,7 +17,11 @@
     % endif
 </%def>
 
-<h2>${_('Sentence')} ${ctx.id}</h2>
+<h3>${_('Sentence')} ${ctx.id}</h3>
+
+${cutil.rendered_sentence(request, ctx, in_context=False, text_link=False)|n}
+
+
 <dl>
     <dt>${_('Language')}:</dt>
     <dd>${h.link(request, ctx.language)}</dd>
@@ -28,33 +32,28 @@
         % endfor
         </dd>
     % endif
-</dl>
-
-${cutil.rendered_sentence(request, ctx, in_context=False, text_link=False)|n}
-
-<dl>
-% if ctx.comment:
-<dt>${_('Comment')}:</dt>
-<dd>${ctx.markup_comment or ctx.comment|n}</dd>
-% endif
-% if ctx.source:
-<dt>${_('Type')}:</dt>
-<dd>${ctx.type}</dd>
-% endif
-% if ctx.speaker:
-<dt>${_('Speaker')}:</dt>
-<dd>${h.link(request, ctx.speaker[0].speaker)}</dd>
-% endif
-% if ctx.references or ctx.source or ctx.text_assocs:
-<dt>${_('Source')}:</dt>
-% if ctx.source:
-<dd>${ctx.source}</dd>
-% endif
-% if ctx.references:
-<dd>${h.linked_references(request, ctx)|n}</dd>
-% endif
-% if ctx.text_assocs:
-<dd>${h.link(request, ctx.text_assocs[0].text, url_kw={"_anchor":ctx.id})}</dd>
-% endif
-% endif
+    % if ctx.comment:
+        <dt>${_('Comment')}:</dt>
+        <dd>${ctx.markup_comment or ctx.comment|n}</dd>
+    % endif
+    % if ctx.source:
+        <dt>${_('Type')}:</dt>
+        <dd>${ctx.type}</dd>
+    % endif
+    % if ctx.speaker:
+        <dt>${_('Speaker')}:</dt>
+        <dd>${h.link(request, ctx.speaker[0].speaker)}</dd>
+    % endif
+    % if ctx.references or ctx.source or ctx.text_assocs:
+        <dt>${_('Source')}:</dt>
+        % if ctx.source:
+            <dd>${ctx.source}</dd>
+        % endif
+        % if ctx.references:
+            <dd>${h.linked_references(request, ctx)|n}</dd>
+        % endif
+        % if ctx.text_assocs:
+            <dd>${h.link(request, ctx.text_assocs[0].text, url_kw={"_anchor":ctx.id})}: ${ctx.text_assocs[0].record_number}</dd>
+        % endif
+    % endif
 </dl>
