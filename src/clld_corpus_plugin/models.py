@@ -66,7 +66,7 @@ class SentenceTag(Base, PolymorphicBaseMixin):
 
 
 try:
-    from clld_morphology_plugin.models import Wordform, Meaning, FormMeaning
+    from clld_morphology_plugin.models import Wordform
 except ImportError:
 
     @implementer(IWordform)
@@ -105,11 +105,9 @@ class TextSentence(Base, PolymorphicBaseMixin):
     sentence = relationship(Sentence, innerjoin=True, backref="text_assocs")
 
 
-class SentenceSlice(Base):
+class SentencePart(Base):
     form_pk = Column(Integer, ForeignKey("wordform.pk"))
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"))
-    formmeaning_pk = Column(Integer, ForeignKey("formmeaning.pk"))
     form = relationship(Wordform, backref="sentence_assocs")
     sentence = relationship(Sentence, backref="forms")
-    form_meaning = relationship(FormMeaning, backref="form_tokens")
     index = Column(Integer)
