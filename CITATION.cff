@@ -6,9 +6,9 @@ authors:
   - family-names: Matter
     given-names: Florian
     orcid: "https://orcid.org/0000-0002-2545-5154"
-version: "0.0.7"
-date-released: 2022-11-27
-url: "https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.7"
+version: "0.0.8"
+date-released: 2023-06-21
+url: "https://github.com/fmatter/clld-corpus-plugin/releases/tag/0.0.8"
 keywords:
   - clld
   - corpus linguistics
