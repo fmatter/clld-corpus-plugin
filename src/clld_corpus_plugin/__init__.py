@@ -1,9 +1,11 @@
 """Top-level package for clld-corpus-plugin."""
+import logging
+from pyramid.response import FileResponse
+from pyramid.response import Response
+from clld_corpus_plugin import datatables
 from clld_corpus_plugin import interfaces
 from clld_corpus_plugin import models
-from clld_corpus_plugin import datatables
-from pyramid.response import Response, FileResponse
-import logging
+
 
 log = logging.getLogger(__name__)
 
@@ -36,8 +38,8 @@ def includeme(config):
         "speaker", models.Speaker, interfaces.ISpeaker, with_index=True
     )
     config.register_resource("tag", models.Tag, interfaces.ITag, with_index=True)
-
     config.add_route("audio_route", "/audio/{audio_id}")
     config.add_view(audio_view, route_name="audio_route")
-    config.register_datatable("texts", datatables.Texts)
+
     config.register_datatable("sentences", datatables.SentencesWithAudio)
+    config.register_datatable("texts", datatables.Texts)
