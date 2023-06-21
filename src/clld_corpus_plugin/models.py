@@ -36,7 +36,7 @@ class Speaker(Base, IdNameDescriptionMixin):
 
 
 @implementer(interfaces.ISentence)
-class RichSentence(CustomModelMixin, Sentence):
+class Record(CustomModelMixin, Sentence):
     pk = Column(Integer, ForeignKey("sentence.pk"), primary_key=True)
 
     contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
@@ -49,7 +49,7 @@ class SpeakerSentence(Base, PolymorphicBaseMixin):
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
     speaker_pk = Column(Integer, ForeignKey("speaker.pk"), nullable=False)
     speaker = relationship(Speaker, innerjoin=True, backref="sentences")
-    sentence = relationship(RichSentence, innerjoin=True, backref="speaker")
+    sentence = relationship(Record, innerjoin=True, backref="speaker")
 
 
 @implementer(IText)
@@ -76,7 +76,7 @@ class SentenceTag(Base, PolymorphicBaseMixin):
 
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"), nullable=False)
     tag_pk = Column(Integer, ForeignKey("tag.pk"), nullable=False)
-    sentence = relationship(RichSentence, innerjoin=True, backref="tags")
+    sentence = relationship(Record, innerjoin=True, backref="tags")
     tag = relationship(Tag, innerjoin=True, backref="sentences")
 
 
@@ -120,12 +120,12 @@ class TextSentence(Base, PolymorphicBaseMixin):
         backref="sentences",
         order_by="desc(TextSentence.record_number)",
     )
-    sentence = relationship(RichSentence, innerjoin=True, backref="text_assocs")
+    sentence = relationship(Record, innerjoin=True, backref="text_assocs")
 
 
 class SentencePart(Base):
     form_pk = Column(Integer, ForeignKey("wordform.pk"))
     sentence_pk = Column(Integer, ForeignKey("sentence.pk"))
     form = relationship(Wordform, backref="sentence_assocs")
-    sentence = relationship(RichSentence, backref="forms")
+    sentence = relationship(Record, backref="forms")
     index = Column(Integer)

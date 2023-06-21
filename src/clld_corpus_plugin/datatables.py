@@ -41,7 +41,7 @@ class Sentences(orig_Sentences):
     def base_query(self, query):
         query = super().base_query(query)
         if self.contribution:
-            query = query.filter(models.RichSentence.contribution == self.contribution)
+            query = query.filter(models.Record.contribution == self.contribution)
         return query
 
 
