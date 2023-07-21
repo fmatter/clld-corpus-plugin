@@ -6,12 +6,14 @@
 
 <h3>${_('Speaker')} ${ctx.name}</h3>
 
-<h3>${_('Sentences')}</h3>
-% for s in ctx.sentences:
-    <ol class="example">
-        ${cutil.rendered_sentence(request, s.sentence,     sentence_link=True)}
-    </ol>
-% endfor
+% if ctx.sentences:
+    <h3>${_('Sentences')}</h3>
+    % for s in ctx.sentences:
+        <ol class="example">
+            ${cutil.rendered_sentence(request, s.sentence,     sentence_link=True)}
+        </ol>
+    % endfor
+% endif
 
 <script>
 var highlight_targets = document.getElementsByName("${ctx.id}");
