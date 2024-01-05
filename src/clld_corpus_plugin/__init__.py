@@ -10,7 +10,7 @@ from clld_corpus_plugin import models
 log = logging.getLogger(__name__)
 
 __author__ = "Florian Matter"
-__email__ = "florianmatter@gmail.com"
+__email__ = "flmt@mailbox.org"
 __version__ = "0.0.9.dev"
 
 audio_suffixes = [".mp3", ".wav"]

@@ -138,7 +138,14 @@ def rendered_sentence(
     else:
         text_ref = ""
 
-    if sentence.audio:
+    if "audio_url" in sentence.jsondata:
+        audio_content = HTML.audio(
+            "",
+            HTML.source(src=sentence.jsondata["audio_url"], type="audio/x-wav"),
+            controls="controls",
+            preload="none",
+        )        
+    elif sentence.audio:
         audio_content = HTML.audio(
             "",
             HTML.source(src=f"/audio/{sentence.audio}", type="audio/x-wav"),
